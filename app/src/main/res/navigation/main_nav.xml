@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/itemHome">
+
+    <fragment
+        android:id="@+id/itemHome"
+        android:name="com.anmp.a160420121_uts_anmp.view.MainFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/openDetailKos"
+            app:destination="@id/detailKosFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemListings"
+        android:name="com.anmp.a160420121_uts_anmp.view.CreationFragment"
+        android:label="Listings"
+        tools:layout="@layout/fragment_creation" />
+    <fragment
+        android:id="@+id/itemProfile"
+        android:name="com.anmp.a160420121_uts_anmp.view.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/detailKosFragment"
+        android:name="com.anmp.a160420121_uts_anmp.view.DetailKosFragment"
+        android:label="Detail Kos"
+        tools:layout="@layout/fragment_detail_kos" >
+        <argument
+            android:name="id"
+            app:argType="string" />
+        <action
+            android:id="@+id/openDetailKamar"
+            app:destination="@id/detailKamarFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailKamarFragment"
+        android:name="com.anmp.a160420121_uts_anmp.view.DetailKamarFragment"
+        android:label="Detail Kamar"
+        tools:layout="@layout/fragment_detail_kamar" >
+        <argument
+            android:name="idkamar"
+            app:argType="string" />
+        <argument
+            android:name="idkos"
+            app:argType="string" />
+    </fragment>
+</navigation>
