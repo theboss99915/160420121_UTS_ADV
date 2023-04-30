@@ -21,3 +21,18 @@ fun ImageView.loadImage(url: String?, progressBar: ProgressBar) {
             }
         })
 }
+
+fun ImageView.loadImageNoBar(url: String?) {
+    Picasso.get()
+        .load(url)
+        .resize(400, 400)
+        .centerCrop()
+        .error(R.drawable.ic_baseline_error_24)
+        .into(this, object: Callback {
+            override fun onSuccess() {
+
+            }
+            override fun onError(e: Exception?) {
+            }
+        })
+}

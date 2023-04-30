@@ -13,17 +13,33 @@
         <action
             android:id="@+id/openDetailKos"
             app:destination="@id/detailKosFragment" />
+        <action
+            android:id="@+id/viewPictureKos"
+            app:destination="@id/viewPictureFragment" />
     </fragment>
     <fragment
-        android:id="@+id/itemListings"
-        android:name="com.anmp.a160420121_uts_anmp.view.CreationFragment"
-        android:label="Listings"
-        tools:layout="@layout/fragment_creation" />
+        android:id="@+id/itemSort"
+        android:name="com.anmp.a160420121_uts_anmp.view.SortFragment"
+        android:label="Sort Kos"
+        tools:layout="@layout/fragment_sort">
+        <action
+            android:id="@+id/toDetailSort"
+            app:destination="@id/detailFilterFragment" />
+    </fragment>
     <fragment
         android:id="@+id/itemProfile"
         android:name="com.anmp.a160420121_uts_anmp.view.ProfileFragment"
         android:label="Profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/toLogin"
+            app:destination="@id/loginFragment" />
+        <argument
+            android:name="username"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="blank" />
+    </fragment>
     <fragment
         android:id="@+id/detailKosFragment"
         android:name="com.anmp.a160420121_uts_anmp.view.DetailKosFragment"
@@ -35,6 +51,12 @@
         <action
             android:id="@+id/openDetailKamar"
             app:destination="@id/detailKamarFragment" />
+        <action
+            android:id="@+id/viewPictureKamar"
+            app:destination="@id/viewPictureFragment" />
+        <action
+            android:id="@+id/backToHomeFromKos"
+            app:destination="@id/itemHome" />
     </fragment>
     <fragment
         android:id="@+id/detailKamarFragment"
@@ -47,5 +69,45 @@
         <argument
             android:name="idkos"
             app:argType="string" />
+        <action
+            android:id="@+id/backToKosFromKamar"
+            app:destination="@id/detailKosFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/viewPictureFragment"
+        android:name="com.anmp.a160420121_uts_anmp.view.ViewPictureFragment"
+        android:label="View Picutre"
+        tools:layout="@layout/fragment_view_picture" >
+        <argument
+            android:name="url"
+            app:argType="string" />
+    </dialog>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.anmp.a160420121_uts_anmp.view.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/backToProfile"
+            app:destination="@id/itemProfile"
+            app:popUpTo="@id/itemProfile" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFilterFragment"
+        android:name="com.anmp.a160420121_uts_anmp.view.DetailFilterFragment"
+        android:label="Detail Sort"
+        tools:layout="@layout/fragment_detail_sort" >
+        <action
+            android:id="@+id/backToSortMain"
+            app:destination="@id/itemSort" />
+        <argument
+            android:name="value"
+            app:argType="string" />
+        <action
+            android:id="@+id/sortDetailToDetailKos"
+            app:destination="@id/detailKosFragment" />
+        <action
+            android:id="@+id/viewPictureSort"
+            app:destination="@id/viewPictureFragment" />
     </fragment>
 </navigation>

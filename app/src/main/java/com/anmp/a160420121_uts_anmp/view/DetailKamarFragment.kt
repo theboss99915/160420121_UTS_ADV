@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import com.anmp.a160420121_uts_anmp.R
 import com.anmp.a160420121_uts_anmp.model.Kamar
 import com.anmp.a160420121_uts_anmp.util.loadImage
@@ -51,13 +52,13 @@ class DetailKamarFragment : Fragment() {
     {
         viewModel.kamarList.observe(viewLifecycleOwner, Observer {
             var kamarDetails = it
-            txtDetailKamarMandi.text = it.kamarmandidalam?.capitalize()
-            txtDetailHargaPerBulan.text = "Rp. " + it.hargaperbulan
-            txtDetailLuasKamar.text = it.luaskamar + " m2"
-            txtDetailListrik.text = it.termasuklistrik?.capitalize()
-            txtDetailMaksKamar.text = it.maksperkamar + " orang"
-            txtDetailAC.text = it.ac?.capitalize()
-            imageViewDetailKamar.loadImage(it.url,progressBarDetailKamar)
+            txtDetailKamarMandi.text = kamarDetails .kamarmandidalam?.capitalize()
+            txtDetailHargaPerBulan.text = "Rp. " + kamarDetails .hargaperbulan
+            txtDetailLuasKamar.text = kamarDetails .luaskamar + " m2"
+            txtDetailListrik.text = kamarDetails .termasuklistrik?.capitalize()
+            txtDetailMaksKamar.text = kamarDetails .maksperkamar + " orang"
+            txtDetailAC.text = kamarDetails .ac?.capitalize()
+            imageViewDetailKamar.loadImage(kamarDetails .url,progressBarDetailKamar)
 
         })
     }

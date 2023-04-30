@@ -30,6 +30,10 @@ class KamarListAdapter(val kamarList: ArrayList<Kamar>,var kosid : String) :
             val action = DetailKosFragmentDirections.openDetailKamar(kamarList[position].id.toString(),kosid)
             Navigation.findNavController(it).navigate(action)
         }
+        holder.view.imageViewKamar.setOnClickListener(){
+            val action = DetailKosFragmentDirections.viewPictureKamar(kamarList[position].url.toString())
+            Navigation.findNavController(it).navigate(action)
+        }
     }
 
     override fun getItemCount(): Int {

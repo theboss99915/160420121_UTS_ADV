@@ -8,9 +8,9 @@
         android:title="Home"
         app:showAsAction="always" />
     <item
-        android:id="@+id/itemListings"
+        android:id="@+id/itemSort"
         android:icon="@drawable/ic_baseline_list_24"
-        android:title="My Creation"
+        android:title="Sort"
         app:showAsAction="always" />
     <item
         android:id="@+id/itemProfile"

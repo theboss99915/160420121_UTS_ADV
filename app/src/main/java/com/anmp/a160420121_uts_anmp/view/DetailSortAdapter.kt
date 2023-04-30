@@ -11,27 +11,27 @@ import com.anmp.a160420121_uts_anmp.util.loadImage
 import kotlinx.android.synthetic.main.layout_item_list_kamar.view.*
 import kotlinx.android.synthetic.main.layout_item_list_kos.view.*
 
-class KosListAdapter(val kosList: ArrayList<Kos>) :
-    RecyclerView.Adapter<KosListAdapter.KosViewHolder>() {
-    class KosViewHolder(var view: View) : RecyclerView.ViewHolder(view)
+class DetailSortAdapter(val kosList: ArrayList<Kos>) :
+    RecyclerView.Adapter<DetailSortAdapter.SortDetailViewHolder>() {
+    class SortDetailViewHolder(var view: View) : RecyclerView.ViewHolder(view)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): KosViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SortDetailViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.layout_item_list_kos, parent, false)
-        return KosViewHolder(view)
+        return SortDetailViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: KosViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: SortDetailViewHolder, position: Int) {
         holder.view.txtNamaKos.text = kosList[position].nama
         holder.view.txtAlamatKos.text = kosList[position].alamat
         holder.view.txtTipe.text = kosList[position].tipekos?.capitalize()
         holder.view.imageViewKos.loadImage(kosList[position].url,holder.view.progressBarKos)
         holder.view.btnDetailKos.setOnClickListener {
-            val action = MainFragmentDirections.openDetailKos(kosList[position].idkos.toString())
+            val action = DetailFilterFragmentDirections.sortDetailToDetailKos(kosList[position].idkos.toString())
             Navigation.findNavController(it).navigate(action)
         }
         holder.view.imageViewKos.setOnClickListener(){
-            val action = MainFragmentDirections.viewPictureKos(kosList[position].url.toString())
+            val action = DetailFilterFragmentDirections.viewPictureSort(kosList[position].url.toString())
             Navigation.findNavController(it).navigate(action)
         }
     }
