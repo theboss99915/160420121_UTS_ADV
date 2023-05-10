@@ -22,7 +22,7 @@
                 android:layout_height="match_parent">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recViewSortDetail"
+                    android:id="@+id/recViewFilterDetail"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="40dp"
@@ -34,32 +34,32 @@
                     tools:listitem="@layout/layout_item_list_kos" />
 
                 <ProgressBar
-                    android:id="@+id/progressLoadSortDetail"
+                    android:id="@+id/progressLoadFilterDetail"
                     style="?android:attr/progressBarStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/recViewSortDetail"
-                    app:layout_constraintStart_toStartOf="@+id/recViewSortDetail"
-                    app:layout_constraintTop_toTopOf="@+id/recViewSortDetail" />
+                    app:layout_constraintEnd_toEndOf="@+id/recViewFilterDetail"
+                    app:layout_constraintStart_toStartOf="@+id/recViewFilterDetail"
+                    app:layout_constraintTop_toTopOf="@+id/recViewFilterDetail" />
 
                 <TextView
-                    android:id="@+id/textErrorSortDetail"
+                    android:id="@+id/textErrorFilterDetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Error Loading"
-                    app:layout_constraintBottom_toBottomOf="@+id/recViewSortDetail"
-                    app:layout_constraintEnd_toEndOf="@+id/recViewSortDetail"
+                    app:layout_constraintBottom_toBottomOf="@+id/recViewFilterDetail"
+                    app:layout_constraintEnd_toEndOf="@+id/recViewFilterDetail"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/recViewSortDetail" />
+                    app:layout_constraintTop_toTopOf="@+id/recViewFilterDetail" />
 
                 <TextView
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="100dp"
-                    app:layout_constraintEnd_toEndOf="@+id/recViewSortDetail"
-                    app:layout_constraintTop_toBottomOf="@+id/recViewSortDetail" />
+                    app:layout_constraintEnd_toEndOf="@+id/recViewFilterDetail"
+                    app:layout_constraintTop_toBottomOf="@+id/recViewFilterDetail" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

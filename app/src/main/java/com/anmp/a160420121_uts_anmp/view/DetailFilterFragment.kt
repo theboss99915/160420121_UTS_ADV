@@ -12,8 +12,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.anmp.a160420121_uts_anmp.R
-import com.anmp.a160420121_uts_anmp.model.Kos
-import com.anmp.a160420121_uts_anmp.viewmodel.ListViewModel
+import com.anmp.a160420121_uts_anmp.viewmodel.FilterViewModel
+import kotlinx.android.synthetic.main.fragment_detail_filter.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,66 +26,51 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class DetailFilterFragment : Fragment() {
-    private lateinit var viewModel: ListViewModel
-    private val kosListAdapter = DetailSortAdapter(arrayListOf())
-    var sort = ""
+    private lateinit var viewModel: FilterViewModel
+    private val kosListAdapter = DetailFilterAdapter(arrayListOf())
+    var property = ""
+    var value = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detail_sort, container, false)
+        return inflater.inflate(R.layout.fragment_detail_filter, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if(arguments != null) {
-            sort = DetailFilterFragmentArgs.fromBundle(requireArguments()).value
+            property = DetailFilterFragmentArgs.fromBundle(requireArguments()).property
+            value = DetailFilterFragmentArgs.fromBundle(requireArguments()).value
         }
 
-        viewModel = ViewModelProvider(this).get(ListViewModel::class.java)
-        viewModel.refresh()
+        viewModel = ViewModelProvider(this).get(FilterViewModel::class.java)
+        viewModel.refresh(property,value)
 
-        val recView = view.findViewById<RecyclerView>(R.id.recViewSortDetail)
+        val recView = view.findViewById<RecyclerView>(R.id.recViewFilterDetail)
         recView.layoutManager = LinearLayoutManager(context)
         recView.adapter = kosListAdapter
         observeViewModel()
     }
 
     fun observeViewModel() {
-        viewModel.kosLists.observe(viewLifecycleOwner, Observer {
-            var listKos = it
-            if(sort=="nama")
-            {
-                var sortedList = listKos.sortedBy{ it.nama }
-                kosListAdapter.updateList(ArrayList(sortedList))
-            }
-            else if(sort=="wifi")
-            {
-                var sortedList = listKos.sortedByDescending{ it.wifi }
-                kosListAdapter.updateList(ArrayList(sortedList))
-            }
-            else if(sort=="tipekos")
-            {
-                var sortedList = listKos.sortedBy{ it.tipekos }
-                kosListAdapter.updateList(ArrayList(sortedList))
-            }
-
+        viewModel.kosList.observe(viewLifecycleOwner, Observer {
+            kosListAdapter.updateList(it)
         })
 
         viewModel.kosLoadErrorLD.observe(viewLifecycleOwner, Observer {
-            val txtError = view?.findViewById<TextView>(R.id.textErrorSortDetail)
+            val txtError = view?.findViewById<TextView>(R.id.textErrorFilterDetail)
             if(it == true) {
-                txtError?.visibility = View.VISIBLE
-            } else {
-                txtError?.visibility = View.GONE
+               txtError?.visibility = View.VISIBLE
+            } else { txtError?.visibility = View.GONE
             }
         })
 
         viewModel.loadingLD.observe(viewLifecycleOwner, Observer {
-            val progressLoad = view?.findViewById<ProgressBar>(R.id.progressLoadSortDetail)
-            val recView = view?.findViewById<RecyclerView>(R.id.recView)
+            val progressLoad = view?.findViewById<ProgressBar>(R.id.progressLoadFilterDetail)
+            val recView = view?.findViewById<RecyclerView>(R.id.recViewFilterDetail)
             if(it == true) {
                 recView?.visibility = View.GONE
                 progressLoad?.visibility = View.VISIBLE
@@ -94,6 +79,7 @@ class DetailFilterFragment : Fragment() {
                 progressLoad?.visibility = View.GONE
             }
         })
+
     }
 
 }

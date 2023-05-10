@@ -18,12 +18,11 @@
             app:destination="@id/viewPictureFragment" />
     </fragment>
     <fragment
-        android:id="@+id/itemSort"
-        android:name="com.anmp.a160420121_uts_anmp.view.SortFragment"
-        android:label="Sort Kos"
-        tools:layout="@layout/fragment_sort">
+        android:id="@+id/itemFilter"
+        android:name="com.anmp.a160420121_uts_anmp.view.FilterFragment"
+        android:label="Filter Kos">
         <action
-            android:id="@+id/toDetailSort"
+            android:id="@+id/toDetailFilter"
             app:destination="@id/detailFilterFragment" />
     </fragment>
     <fragment
@@ -96,10 +95,10 @@
         android:id="@+id/detailFilterFragment"
         android:name="com.anmp.a160420121_uts_anmp.view.DetailFilterFragment"
         android:label="Detail Sort"
-        tools:layout="@layout/fragment_detail_sort" >
+        tools:layout="@layout/fragment_detail_filter" >
         <action
             android:id="@+id/backToSortMain"
-            app:destination="@id/itemSort" />
+            app:destination="@id/itemFilter" />
         <argument
             android:name="value"
             app:argType="string" />
@@ -109,5 +108,8 @@
         <action
             android:id="@+id/viewPictureSort"
             app:destination="@id/viewPictureFragment" />
+        <argument
+            android:name="property"
+            app:argType="string" />
     </fragment>
 </navigation>

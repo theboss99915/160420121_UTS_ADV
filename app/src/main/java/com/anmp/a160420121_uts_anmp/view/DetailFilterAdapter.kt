@@ -8,11 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.anmp.a160420121_uts_anmp.R
 import com.anmp.a160420121_uts_anmp.model.Kos
 import com.anmp.a160420121_uts_anmp.util.loadImage
-import kotlinx.android.synthetic.main.layout_item_list_kamar.view.*
 import kotlinx.android.synthetic.main.layout_item_list_kos.view.*
 
-class DetailSortAdapter(val kosList: ArrayList<Kos>) :
-    RecyclerView.Adapter<DetailSortAdapter.SortDetailViewHolder>() {
+class DetailFilterAdapter(val kosList: ArrayList<Kos>) :
+    RecyclerView.Adapter<DetailFilterAdapter.SortDetailViewHolder>() {
     class SortDetailViewHolder(var view: View) : RecyclerView.ViewHolder(view)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SortDetailViewHolder {
