@@ -1,16 +1,15 @@
 package com.anmp.a160420121_uts_anmp.view
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.anmp.a160420121_uts_anmp.R
-import com.anmp.a160420121_uts_anmp.viewmodel.ListViewModel
 import com.anmp.a160420121_uts_anmp.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_login.*
@@ -26,9 +25,10 @@ import kotlinx.android.synthetic.main.layout_item_list_kos.view.*
  */
 class LoginFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    val username = "username"
-    val password = "password"
+    var usertf: Boolean = false
+
     private lateinit var viewModel: LoginViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,23 +40,36 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
-        viewModel.refresh(inputUsername.text.toString(),inputPassword.text.toString())
+        observeViewModel()
 
         buttonLogin.setOnClickListener(){
             viewModel.refresh(inputUsername.text.toString(),inputPassword.text.toString())
+            observeViewModel()
+
+            if(usertf==true)
+            {
+                val action = LoginFragmentDirections.backToProfile(inputUsername.text.toString())
+                Navigation.findNavController(it).navigate(action)
+            }
+            else{
+                Toast.makeText(context,"Username and/or password is wrong. Please try again!",Toast.LENGTH_SHORT).show()
+            }
+
         }
 
     }
 
     fun observeViewModel() {
         viewModel.userLog.observe(viewLifecycleOwner, Observer {
-            if(it !=null) {
-                val action = LoginFragmentDirections.backToProfile(it.username)
-                Navigation.findNavController(navView).navigate(action)
-            } else {
-                Toast.makeText(this.context,"Username and/or Password is wrong ! Please try again",Toast.LENGTH_SHORT).show()
+            if(it==true)
+            {
+                setSomeVariable(true)
             }
         })
+    }
+
+    fun setSomeVariable(someVariable: Boolean) {
+        this.usertf = someVariable
     }
 
 }

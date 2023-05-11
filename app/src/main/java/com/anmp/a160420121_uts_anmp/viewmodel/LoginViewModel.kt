@@ -14,11 +14,12 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
 class LoginViewModel (application: Application): AndroidViewModel(application){
-    var userLog = MutableLiveData<User>()
+    var userLog = MutableLiveData<Boolean>()
     val TAG = "volleyTag"
     private var queue: RequestQueue? = null
 
     fun refresh(username:String,password:String){
+        userLog.value = false
         queue = Volley.newRequestQueue(getApplication())
         val url = "https://raw.githubusercontent.com/theboss99915/dataset/main/users.json"
         val stringRequest = StringRequest(
@@ -28,13 +29,14 @@ class LoginViewModel (application: Application): AndroidViewModel(application){
                 val result = Gson().fromJson<List<User>>(it, sType)
                 result.forEach{
                     if (it.username.equals(username) && it.password.equals(password)){
-                        userLog.value = it
+                        userLog.value = true
                     }
                 }
                 Log.d("showuser", userLog.value.toString())
 
             },
             {
+                userLog.value = false
                 Log.d("showuser", userLog.toString())
             })
 
